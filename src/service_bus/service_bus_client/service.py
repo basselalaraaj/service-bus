@@ -1,5 +1,5 @@
 from azure.servicebus import ServiceBusClient
-from ..config import CONNECTION_STR
+from service_bus.config import CONNECTION_STR
 
 servicebus_client = ServiceBusClient.from_connection_string(
     conn_str=CONNECTION_STR)
