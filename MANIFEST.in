@@ -1,0 +1,5 @@
+include setup.py MANIFEST.in
+recursive-include ./ requirements*.txt
+graft src/service_bus
+prune src/service_bus/static/service_bus/node_modules
+global-exclude *~
