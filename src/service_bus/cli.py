@@ -12,8 +12,6 @@ from .main import *  # noqa
 from service_bus.exceptions import DispatchException
 from service_bus.logging import configure_logging
 
-os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
-
 log = logging.getLogger(__name__)
 
 
@@ -49,10 +47,14 @@ def run_server(log_level):
     import atexit
     from subprocess import Popen
 
-    p = Popen(["yarn", "watch"],
-              cwd="src/service_bus/static/service_bus")
-    atexit.register(p.terminate)
-    uvicorn.run("service_bus.main:app", debug=True,
+    installP = Popen(["yarn", "install"],
+                     cwd="src/service_bus/static/service_bus")
+    installP.communicate()
+
+    buildP = Popen(["yarn", "watch"],
+                   cwd="src/service_bus/static/service_bus")
+    atexit.register(buildP.terminate)
+    uvicorn.run("service_bus.main:app", host="127.0.0.1", debug=True,
                 reload=True, log_level=log_level)
 
 
@@ -61,10 +63,14 @@ def run_server():
     import atexit
     from subprocess import Popen
 
-    p = Popen(["yarn", "build"],
-              cwd="src/service_bus/static/service_bus")
-    atexit.register(p.terminate)
-    uvicorn.run("service_bus.main:app")
+    installP = Popen(["yarn", "install"],
+                     cwd="src/service_bus/static/service_bus")
+    installP.communicate()
+
+    buildP = Popen(["yarn", "build"],
+                   cwd="src/service_bus/static/service_bus")
+    atexit.register(buildP.terminate)
+    uvicorn.run("service_bus.main:app", host="127.0.0.1")
 
 
 def entrypoint():

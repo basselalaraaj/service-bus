@@ -4,15 +4,21 @@ from starlette.applications import Starlette
 from starlette.responses import FileResponse, Response, StreamingResponse
 from starlette.staticfiles import StaticFiles
 from starlette.routing import Mount, Route
+from starlette.middleware import Middleware
+from starlette.middleware.cors import CORSMiddleware
 import httpx
 from os import path
 
 from service_bus.schema import Query
 from service_bus.config import STATIC_DIR
 
+middleware = [
+    Middleware(CORSMiddleware, allow_origins=['*'])
+]
+routes = [Route('/graphql', GraphQLApp(schema=graphene.Schema(query=Query)))]
+
 # we create the ASGI for the app
-app = Starlette(
-    routes=[Route('/graphql', GraphQLApp(schema=graphene.Schema(query=Query)))])
+app = Starlette(routes=routes, middleware=middleware)
 
 # we create the ASGI for the frontend
 frontend = Starlette(
