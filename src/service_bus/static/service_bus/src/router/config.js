@@ -30,14 +30,28 @@ export const protectedRoute = [{
         children: [{
                 path: "/topics",
                 name: "TopicsTable",
-                component: () => import( /* webpackChunkName: "incident-table" */ "@/topics/Table.vue"),
+                component: () => import( /* webpackChunkName: "topics-table" */ "@/topics/Table.vue"),
             },
             {
                 path: "/topics/:name",
-                name: "TopicsTable",
-                component: () => import( /* webpackChunkName: "incident-table" */ "@/topics/Table.vue"),
+                name: "SubscriptionsTable",
+                component: () => import( /* webpackChunkName: "subscriptions-table" */ "@/subscriptions/Table.vue"),
                 props: true,
             },
         ],
+    }, {
+        path: "/dlq-messages",
+        component: DefaultLayout,
+        meta: {
+            title: "Dlq Messages",
+            icon: "view_compact",
+            group: "dlq-messages",
+            requiresAuth: true,
+        },
+        children: [{
+            path: "/dlq-messages/:topic/:subscription",
+            name: "DlqMessagesTable",
+            component: () => import( /* webpackChunkName: "dlq-messages-table" */ "@/dlq-messages/Table.vue"),
+        }, ],
     },
 ];

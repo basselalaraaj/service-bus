@@ -13,19 +13,20 @@ def getTopicList():
 
     topic_list = []
     for topic in topics:
-        subscriptions = getSubscriptionsList(topic)
+        subscriptions = getSubscriptionList(topic.name)
         topic_list.append({"name": topic.name, "subscriptions": subscriptions})
     return topic_list
 
 
-def getSubscriptionsList(topic):
+def getSubscriptionList(topic):
     servicebus_client = getServiceBusClient()
-    subscriptions = servicebus_client.list_subscriptions(topic.name)
+    subscriptions = servicebus_client.list_subscriptions(topic)
 
-    subscriptionsList = []
+    subscriptionList = []
     for subscription in subscriptions:
-        subscriptionsList.append({"name": subscription.name})
-    return subscriptionsList
+        subscriptionList.append({"name": subscription.name})
+
+    return subscriptionList
 
 
 def getDlqMessages(topic, subscription, count):
