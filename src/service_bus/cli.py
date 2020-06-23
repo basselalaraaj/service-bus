@@ -8,7 +8,6 @@ from uvicorn import main as uvicorn_main
 
 from service_bus import __version__, config
 
-from .main import *  # noqa
 from service_bus.exceptions import DispatchException
 from service_bus.logging import configure_logging
 
@@ -47,11 +46,11 @@ def run_server(log_level):
     import atexit
     from subprocess import Popen
 
-    installP = Popen(["yarn", "install"],
+    installP = Popen(["yarn", "install", "--quiet"],
                      cwd="src/service_bus/static/service_bus")
     installP.communicate()
 
-    buildP = Popen(["yarn", "watch"],
+    buildP = Popen(["yarn", "watch", "--quiet"],
                    cwd="src/service_bus/static/service_bus")
     atexit.register(buildP.terminate)
     uvicorn.run("service_bus.main:app", host="127.0.0.1", debug=True,
@@ -60,16 +59,6 @@ def run_server(log_level):
 
 @service_bus_server.command("start")
 def run_server():
-    import atexit
-    from subprocess import Popen
-
-    installP = Popen(["yarn", "install"],
-                     cwd="src/service_bus/static/service_bus")
-    installP.communicate()
-
-    buildP = Popen(["yarn", "build"],
-                   cwd="src/service_bus/static/service_bus")
-    atexit.register(buildP.terminate)
     uvicorn.run("service_bus.main:app", host="127.0.0.1")
 
 

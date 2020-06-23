@@ -3,16 +3,11 @@
 ## Project setup
 
 ```
+python setup.py build
 python setup.py install
 ```
 
-### Compiles and hot-reloads for development
-
-```
-service_bus server develop
-```
-
-### Compiles and minifies for production
+### Project run
 
 ```
 service_bus server start
