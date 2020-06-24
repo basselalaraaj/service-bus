@@ -4,7 +4,7 @@ import {
 
 export const publicRoute = [{
     path: "*",
-    component: () => import( /* webpackChunkName: "incident-table" */ "@/topics/Table.vue"),
+    // component: () => import( /* webpackChunkName: "incident-table" */ "@/topics/Table.vue"),
 }, ];
 
 // NOTE: The order in which routes are added to the list matters when evaluated. For example, /incidents/report will take precendence over /incidents/:name.
@@ -30,11 +30,17 @@ export const protectedRoute = [{
         children: [{
                 path: "/topics",
                 name: "TopicsTable",
+                meta: {
+                    title: "Topics",
+                },
                 component: () => import( /* webpackChunkName: "topics-table" */ "@/topics/Table.vue"),
             },
             {
                 path: "/topics/:name",
                 name: "SubscriptionsTable",
+                meta: {
+                    title: "Subscriptions",
+                },
                 component: () => import( /* webpackChunkName: "subscriptions-table" */ "@/subscriptions/Table.vue"),
                 props: true,
             },
@@ -50,6 +56,9 @@ export const protectedRoute = [{
         },
         children: [{
             path: "/dlq-messages/:topic/:subscription",
+            meta: {
+                title: "Dlq Messages",
+            },
             name: "DlqMessagesTable",
             component: () => import( /* webpackChunkName: "dlq-messages-table" */ "@/dlq-messages/Table.vue"),
         }, ],
