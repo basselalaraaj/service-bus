@@ -1,5 +1,9 @@
 # service-bus
 
+## Example
+
+![Image of Yaktocat](/docs/assets/example.png)
+
 ## Project setup
 
 ### Adding .env file
@@ -20,7 +24,3 @@ python setup.py install
 ```
 service_bus server start
 ```
-
-## Example
-
-![Image of Yaktocat](/docs/assets/example.png)
