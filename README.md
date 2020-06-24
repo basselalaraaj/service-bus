@@ -15,8 +15,12 @@ python setup.py build
 python setup.py install
 ```
 
-### Project run
+## Project run
 
 ```
 service_bus server start
 ```
+
+## Example
+
+![Image of Yaktocat](/docs/assets/example.png)
