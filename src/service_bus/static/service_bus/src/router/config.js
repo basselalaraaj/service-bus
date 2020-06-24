@@ -25,7 +25,6 @@ export const protectedRoute = [{
             title: "Topics",
             icon: "view_compact",
             group: "topics",
-            requiresAuth: true,
         },
         children: [{
                 path: "/topics",
@@ -45,14 +44,14 @@ export const protectedRoute = [{
                 props: true,
             },
         ],
-    }, {
+    },
+    {
         path: "/dlq-messages",
         component: DefaultLayout,
         meta: {
             title: "Dlq Messages",
             icon: "view_compact",
             group: "dlq-messages",
-            requiresAuth: true,
         },
         children: [{
             path: "/dlq-messages/:topic/:subscription",
@@ -61,6 +60,23 @@ export const protectedRoute = [{
             },
             name: "DlqMessagesTable",
             component: () => import( /* webpackChunkName: "dlq-messages-table" */ "@/dlq-messages/Table.vue"),
+        }, ],
+    },
+    {
+        path: "/settings",
+        component: DefaultLayout,
+        meta: {
+            title: "Settings",
+            icon: "view_compact",
+            group: "settings",
+        },
+        children: [{
+            path: "/settings",
+            meta: {
+                title: "Settings",
+            },
+            name: "Settings",
+            component: () => import( /* webpackChunkName: "settings" */ "@/settings/Form.vue"),
         }, ],
     },
 ];

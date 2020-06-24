@@ -7,13 +7,13 @@
   >
     <template slot-scope="{ result: { loading, error, data } }">
       <!-- Loading -->
-      <div v-if="loading">loading..</div>
+      <div v-if="!data && !error">loading..</div>
 
       <!-- Error -->
-      <div v-else-if="error">We got an error!</div>
+      <div v-if="error">We got an error!</div>
 
       <!-- Result -->
-      <div v-else-if="data">
+      <div v-if="data">
         <v-data-table
           :headers="headers"
           :items="data.getSubscriptionList"
