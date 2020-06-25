@@ -11,39 +11,7 @@ export const publicRoute = [{
 export const protectedRoute = [{
         path: "/",
         component: DefaultLayout,
-        meta: {
-            title: "Topics",
-            group: "topics",
-            icon: "",
-        },
-        redirect: "/topics",
-    },
-    {
-        path: "/topics",
-        component: DefaultLayout,
-        meta: {
-            title: "Topics",
-            icon: "view_compact",
-            group: "topics",
-        },
-        children: [{
-                path: "/topics",
-                name: "TopicsTable",
-                meta: {
-                    title: "Topics",
-                },
-                component: () => import( /* webpackChunkName: "topics-table" */ "@/topics/Table.vue"),
-            },
-            {
-                path: "/topics/:name",
-                name: "SubscriptionsTable",
-                meta: {
-                    title: "Subscriptions",
-                },
-                component: () => import( /* webpackChunkName: "subscriptions-table" */ "@/subscriptions/Table.vue"),
-                props: true,
-            },
-        ],
+        redirect: "/dlq-messages",
     },
     {
         path: "/dlq-messages",
@@ -54,13 +22,30 @@ export const protectedRoute = [{
             group: "dlq-messages",
         },
         children: [{
-            path: "/dlq-messages/:topic/:subscription",
-            meta: {
-                title: "Dlq Messages",
+                path: "/",
+                name: "dlq-messages-topics",
+                meta: {
+                    title: "Dlq Messages Topics",
+                },
+                component: () => import( /* webpackChunkName: "topics-table" */ "@/topics/Table.vue"),
             },
-            name: "DlqMessagesTable",
-            component: () => import( /* webpackChunkName: "dlq-messages-table" */ "@/dlq-messages/Table.vue"),
-        }, ],
+            {
+                path: "/dlq-messages/subscriptions/:topic",
+                name: "dlq-messages-subscriptions",
+                meta: {
+                    title: "Dlq Messages Subscriptions",
+                },
+                component: () => import( /* webpackChunkName: "subscriptions-table" */ "@/subscriptions/Table.vue"),
+                props: true,
+            }, {
+                path: "/dlq-messages/messages/:topic/:subscription",
+                name: "dlq-messages-messages",
+                meta: {
+                    title: "Dlq Messages",
+                },
+                component: () => import( /* webpackChunkName: "dlq-messages-table" */ "@/dlq-messages/Table.vue"),
+            },
+        ],
     },
     {
         path: "/settings",

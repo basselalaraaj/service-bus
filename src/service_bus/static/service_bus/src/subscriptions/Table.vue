@@ -21,9 +21,13 @@
           loading-text="Loading... Please wait"
         >
           <template v-slot:item.name="{ item }">
-            <router-link :to="{ path: '/dlq-messages/' + topic + '/' + item.name }">{{
-              item.name
-            }}</router-link>
+            <router-link
+              :to="{
+                name: 'dlq-messages-messages',
+                params: { topic: topic, subscription: item.name }
+              }"
+              >{{ item.name }}</router-link
+            >
           </template>
         </v-data-table>
       </div>
@@ -45,7 +49,7 @@ export default {
     return {
       GET_SUBSCRIPTION_LIST: GET_SUBSCRIPTION_LIST,
       headers: [{ text: "Name", value: "name" }],
-      topic: this.$route.params.name
+      topic: this.$route.params.topic
     }
   }
 }

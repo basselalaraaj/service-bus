@@ -46,4 +46,10 @@ module.exports = {
 
     assetsDir: "static",
     runtimeCompiler: true,
+
+    pluginOptions: {
+        apollo: {
+            lintGQL: false
+        }
+    }
 };

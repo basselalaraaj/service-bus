@@ -2,12 +2,12 @@
   <v-app id="inspire">
     <v-navigation-drawer v-model="drawer" app clipped>
       <v-list dense>
-        <v-list-item :to="{ path: '/' }" link>
+        <v-list-item :to="{ path: '/dlq-messages' }" link>
           <v-list-item-action>
             <v-icon>mdi-view-dashboard</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>Topics</v-list-item-title>
+            <v-list-item-title>DLQ Messages</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
         <v-list-item :to="{ path: '/settings' }" link>

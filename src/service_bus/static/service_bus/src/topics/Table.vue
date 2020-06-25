@@ -16,7 +16,10 @@
           loading-text="Loading... Please wait"
         >
           <template v-slot:item.name="{ item }">
-            <router-link :to="{ path: 'topics/' + item.name }">{{ item.name }}</router-link>
+            <router-link
+              :to="{ name: 'dlq-messages-subscriptions', params: { topic: item.name } }"
+              >{{ item.name }}</router-link
+            >
           </template>
         </v-data-table>
       </div>
@@ -37,7 +40,7 @@ export default {
   data() {
     return {
       GET_TOPIC_LIST: GET_TOPIC_LIST,
-      headers: [{ text: "Name", value: "name" }]
+      headers: [{ text: "Topic", value: "name" }]
     }
   }
 }
